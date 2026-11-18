@@ -59,8 +59,8 @@
     modal.querySelector('.lightbox-original').href = work.image;
   }
   function openArtwork(id, trigger) {
-    const cards = [...document.querySelectorAll('.work-card [data-art]')];
-    const visibleIds = cards.length ? cards.map(item => item.dataset.art) : [...document.querySelectorAll('[data-hero]')].map(item => item.dataset.hero);
+    const cards = document.querySelectorAll('.work-card [data-art], .feature-panel [data-art]');
+    const visibleIds = Array.from(cards, item => item.dataset.art);
     galleryIds = [...new Set(visibleIds.includes(id) ? visibleIds : [id, ...visibleIds])];
     galleryIndex = galleryIds.indexOf(id);
     returnFocus = trigger;
@@ -126,31 +126,7 @@
     }
   });
 
-  const heroArt = document.querySelector('.hero-art');
-  document.querySelectorAll('[data-hero]').forEach(button => button.addEventListener('click', () => {
-    const work = byId[button.dataset.hero];
-    const image = document.querySelector('#hero-image');
-    image.src = work.image;
-    image.alt = `${work.title}，${work.description}`;
-    heroArt.dataset.art = work.id;
-    heroArt.setAttribute('aria-label', `放大查看${work.title}`);
-    document.querySelector('#hero-art-label').textContent = work.title;
-    document.querySelectorAll('[data-hero]').forEach(item => {
-      item.classList.toggle('selected', item === button);
-      item.setAttribute('aria-pressed', String(item === button));
-    });
-  }));
   const finePointer = window.matchMedia('(pointer: fine)');
-  if (heroArt && finePointer.matches) {
-    heroArt.addEventListener('pointermove', event => {
-      if (!motionEnabled) return;
-      const rect = heroArt.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - .5;
-      const y = (event.clientY - rect.top) / rect.height - .5;
-      heroArt.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg) rotateZ(-1deg)`;
-    });
-    heroArt.addEventListener('pointerleave', () => { heroArt.style.transform = ''; });
-  }
   document.querySelectorAll('.magnetic').forEach(button => {
     button.addEventListener('pointermove', event => {
       if (!motionEnabled || !finePointer.matches) return;

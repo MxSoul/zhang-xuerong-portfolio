@@ -7,11 +7,11 @@
   <meta name="description" content="张雪荣的游戏 UI 设计作品集，包含热血江湖·觉醒、刀仔、射雕，以及从静态原图制作的 AI 辅助动效示例。">
   <title>张雪荣 · 游戏 UI 设计作品集</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=motion-canvas-2">
+  <link rel="stylesheet" href="styles.css?v=featured-work-1">
   <link rel="preload" as="image" href="assets/pet-cultivation.webp">
   <script src="data.js" defer></script>
-  <script src="app.js?v=20261116-controls" defer></script>
-  <script src="motion-preview.js?v=canvas-2" defer></script>
+  <script src="app.js?v=featured-work-1" defer></script>
+  <script src="motion-preview.js?v=featured-work-1" defer></script>
 </head>
 <body data-page="home" class="compact-home">
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -31,30 +31,43 @@
         </div>
         <div class="feature-stage" aria-label="代表作品预览">
           <div class="feature-selector" role="group" aria-label="切换代表作品">
-            <button type="button" id="show-motion" aria-pressed="true">AI 动效</button>
-            <button type="button" data-hero="swords" aria-pressed="false">系统</button>
-            <button type="button" data-hero="launch" aria-pressed="false">活动</button>
-            <button type="button" data-hero="daily" aria-pressed="false">奖励</button>
+            <button type="button" id="show-motion" aria-controls="pet-feature" aria-pressed="true">AI 动效</button>
+            <button type="button" aria-controls="interface-feature" aria-pressed="false">界面设计</button>
+            <button type="button" aria-controls="icons-feature" aria-pressed="false">图标设计</button>
           </div>
-          <div class="motion-player" id="pet-feature">
-            <div class="motion-stage" id="motion-stage">
-              <img src="assets/pet-cultivation.webp" width="1334" height="750" fetchpriority="high" alt="宠物培养原图，金球悬浮在蓝色人物线稿前">
-            </div>
-            <div class="motion-caption">
-              <h2>宠物培养</h2>
-              <div class="motion-switch" role="group" aria-label="切换动效与原图" hidden>
-                <button type="button" data-mode="motion" aria-pressed="true" aria-controls="motion-stage">动效预览</button>
-                <button type="button" data-mode="still" aria-pressed="false" aria-controls="motion-stage">静态原图</button>
+          <div class="feature-panels">
+            <article class="feature-panel motion-player" id="pet-feature">
+              <div class="motion-stage" id="motion-stage">
+                <img src="assets/pet-cultivation.webp" width="1334" height="750" fetchpriority="high" alt="宠物培养原图，金球悬浮在蓝色人物线稿前">
               </div>
-            </div>
-            <p class="motion-description">我用 AI 让原画里的金色光瀑落入水面，涟漪向外散开，背后的人物像星座一样缓缓明灭。</p>
-            <a class="motion-link" href="pet-cultivation-v6.html">打开交互演示 ↗</a>
-            <p class="motion-status" role="status"></p>
+              <div class="motion-caption">
+                <h2>宠物培养</h2>
+                <div class="motion-switch" role="group" aria-label="切换动效与原图" hidden>
+                  <button type="button" data-mode="motion" aria-pressed="true" aria-controls="motion-stage">动效预览</button>
+                  <button type="button" data-mode="still" aria-pressed="false" aria-controls="motion-stage">静态原图</button>
+                </div>
+              </div>
+              <p class="motion-description">我用 AI 让原画里的金色光瀑落入水面，涟漪向外散开，背后的人物像星座一样缓缓明灭。</p>
+              <a class="motion-link" href="pet-cultivation-v6.html">打开交互演示 ↗</a>
+              <p class="motion-status" role="status"></p>
+            </article>
+            <article class="feature-panel" id="interface-feature" inert>
+              <button class="motion-stage feature-image" data-art="equipment" type="button" aria-label="放大查看万劫装备">
+                <img src="assets/equipment.webp" width="1334" height="750" fetchpriority="low" alt="万劫装备界面，蓝色装备核心与装备槽居左，套装属性列于右侧">
+              </button>
+              <div class="motion-caption"><h2>万劫装备</h2></div>
+              <p class="motion-description">装备槽围绕冰蓝色核心排列，右侧列出各阶套装属性。</p>
+              <a class="motion-link" href="jianghu.html#equipment">查看装备系统 ↗</a>
+            </article>
+            <article class="feature-panel" id="icons-feature" inert>
+              <button class="motion-stage feature-image icon-sheet" data-art="wuxia-icons" type="button" aria-label="放大查看道具与物品图标">
+                <img src="assets/wuxia-icons.webp" width="1082" height="446" fetchpriority="low" alt="两排手绘图标，上排是五种食物，下排是武侠风格的道具与衣饰">
+              </button>
+              <div class="motion-caption"><h2>道具与物品图标</h2></div>
+              <p class="motion-description">从餐盘里的菜肴到衣袍上的纹样，十枚图标并排呈现。</p>
+              <a class="motion-link" href="jianghu.html#icons">查看图标作品 ↗</a>
+            </article>
           </div>
-          <button class="hero-art" data-art="swords" type="button" aria-label="放大查看太虚剑阵" hidden>
-            <img id="hero-image" width="1334" height="750" alt="太虚剑阵修炼界面">
-            <div class="hero-art-foot"><span id="hero-art-label">太虚剑阵</span><span aria-hidden="true">↗</span></div>
-          </button>
         </div>
       </div>
     </section>
@@ -71,7 +84,7 @@
           <img src="assets/daozai-cover-v4.webp" width="1672" height="941" alt="刀仔：独眼角色坐在屋檐上，身后是延伸至远山的江湖街巷" loading="lazy">
           <span class="cover-visit" aria-hidden="true"><span>↗</span></span>
         </a>
-        <div class="project-info"><div><h2><a href="daozai.html">刀仔</a></h2><p>活动玩法、奖励设计与图标</p></div></div>
+        <div class="project-info"><div><h2><a href="daozai.html">刀仔</a></h2><p>游戏界面、道具与功能图标</p></div></div>
       </article>
       <article class="project-card project-shediao reveal" id="shediao">
         <a class="project-cover landscape-cover illustrated-cover" href="shediao.html" aria-label="查看射雕项目">

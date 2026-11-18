@@ -1,12 +1,10 @@
 (() => {
   const section = document.querySelector('#ai-motion');
   const panel = section.querySelector('#pet-feature');
-  const art = section.querySelector('.hero-art');
   const stage = panel.querySelector('.motion-stage');
   const controls = panel.querySelector('.motion-switch');
   const status = panel.querySelector('.motion-status');
-  const feature = section.querySelector('#show-motion');
-  const stills = section.querySelectorAll('[data-hero]');
+  const selectors = section.querySelectorAll('.feature-selector button');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let animate = !reduced.matches;
   let visible = true;
@@ -38,7 +36,7 @@
   function update() {
     controls.querySelector('[data-mode="motion"]').setAttribute('aria-pressed', String(animate));
     controls.querySelector('[data-mode="still"]').setAttribute('aria-pressed', String(!animate));
-    const active = animate && !panel.hidden && visible && !document.hidden;
+    const active = animate && !panel.inert && visible && !document.hidden;
     if (active && !frame) loadScene();
     if (frame) {
       frame.hidden = !animate;
@@ -56,13 +54,12 @@
     update();
   });
 
-  function selectFeature(isPet) {
-    panel.hidden = !isPet;
-    art.hidden = isPet;
-    feature.setAttribute('aria-pressed', String(isPet));
-    if (isPet) stills.forEach(button => {
-      button.classList.remove('selected');
-      button.setAttribute('aria-pressed', 'false');
+  function selectFeature(panelId) {
+    selectors.forEach(button => {
+      const id = button.getAttribute('aria-controls');
+      const active = id === panelId;
+      document.getElementById(id).inert = !active;
+      button.setAttribute('aria-pressed', String(active));
     });
     update();
   }
@@ -74,9 +71,8 @@
     status.textContent = '';
     update();
   });
-  feature.addEventListener('click', () => selectFeature(true));
-  document.querySelector('nav a[href="#ai-motion"]')?.addEventListener('click', () => selectFeature(true));
-  stills.forEach(button => button.addEventListener('click', () => selectFeature(false)));
+  selectors.forEach(button => button.addEventListener('click', () => selectFeature(button.getAttribute('aria-controls'))));
+  document.querySelector('nav a[href="#ai-motion"]')?.addEventListener('click', () => selectFeature(panel.id));
   reduced.addEventListener('change', event => { animate = !event.matches; update(); });
   document.addEventListener('visibilitychange', update);
   if ('IntersectionObserver' in window) {
