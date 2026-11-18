@@ -105,9 +105,10 @@ html.motion-off{scroll-behavior:auto}html.motion-off *,html.motion-off *:before,
 .illustrated-cover:hover>img{transform:none}
 .illustrated-cover .cover-visit>span{background:#f5f4ebdf;border-color:#17201b35;color:var(--ink)}
 
-.feature-stage { min-width: 0; position: relative; z-index: 1; }
+.feature-stage { min-width: 0; position: relative; z-index: 1; container-type: inline-size; }
 .feature-stage [hidden] { display: none !important; }
-.feature-selector { display: flex; gap: clamp(10px, 2vw, 24px); margin-bottom: 14px; }
+.feature-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; margin-bottom: 14px; }
+.feature-selector { display: flex; gap: clamp(10px, 2vw, 24px); }
 .feature-selector button { padding: 8px 2px; min-height: 40px; border: 0; border-bottom: 1px solid transparent; background: transparent; color: #c1c8bb; font-size: 13px; font-weight: 600; }
 .feature-selector button[aria-pressed="true"] { border-color: var(--lime); color: var(--lime); }
 /* All panels contribute their intrinsic dimensions, even when only one is visible. */
@@ -115,31 +116,34 @@ html.motion-off{scroll-behavior:auto}html.motion-off *,html.motion-off *:before,
 .feature-panel { grid-area: 1 / 1; min-width: 0; }
 .feature-panel[inert] { visibility: hidden; }
 @supports (grid-template-rows: subgrid) {
-  .feature-panel { display: grid; grid-row: 1 / span 5; grid-template-rows: subgrid; }
-  .feature-panel .motion-link { justify-self: start; }
+  .feature-panel { display: grid; grid-row: 1 / span 3; grid-template-rows: subgrid; }
 }
 .motion-stage { position: relative; aspect-ratio: 1334 / 750; overflow: hidden; border-radius: 6px; background: #101b30; }
 .motion-stage img, .motion-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border: 0; object-fit: contain; }
-.feature-image { display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; }
+.feature-image { display: block; width: 100%; }
 .feature-image.icon-sheet { background: #fff; }
-.motion-stage iframe { position: absolute; inset: 0; pointer-events: none; opacity: 0; }
+.motion-stage iframe { pointer-events: none; opacity: 0; }
 .motion-stage iframe.is-ready { opacity: 1; }
-.motion-caption { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 14px; }
-.motion-caption h2 { color: #f4f4ee; font-size: clamp(20px, 2vw, 26px); }
+.demo-link { position: absolute; inset: 0; z-index: 1; }
+.demo-link:focus-visible { outline-offset: -4px; }
 .motion-switch { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid #657060; border-radius: 30px; }
-.motion-switch button { min-height: 38px; padding: 5px 13px; border: 0; border-radius: 22px; background: transparent; color: #d3d7ce; font-size: 12px; font-weight: 600; }
+.motion-switch[inert] { visibility: hidden; }
+.motion-switch button { min-height: 32px; padding: 4px 11px; border: 0; border-radius: 22px; background: transparent; color: #d3d7ce; font-size: 12px; font-weight: 600; }
 .motion-switch button[aria-pressed="true"] { color: var(--ink); background: var(--lime); }
-.motion-description { color: #c1c8bb; font-size: 14px; line-height: 1.8; margin-top: 10px; }
-.motion-link { display: inline-block; color: var(--lime); font-size: 13px; padding: 6px 0; text-underline-offset: 4px; }
-.motion-link:hover { text-decoration: underline; }
+.motion-description { color: #c1c8bb; font-size: 14px; line-height: 1.8; margin-top: 14px; }
 .motion-status:not(:empty) { margin-top: 6px; color: #d1d7ca; font-size: 12px; }
 @media (min-width: 851px) {
   .compact-home .hero-inner { grid-template-columns: minmax(215px, .66fr) minmax(0, 1.34fr); gap: clamp(20px, 4vw, 64px); }
 }
 @media (max-width: 560px) {
   .site-header nav { gap: clamp(9px, 3vw, 18px); }
-  .motion-caption { gap: 6px; }
-  .motion-switch button { padding-inline: 10px; }
+}
+@container (max-width: 395px) {
+  .feature-toolbar { column-gap: 6px; }
+  .feature-selector { gap: 8px; }
+  .feature-selector button { padding-inline: 0; }
+  .motion-switch button { padding-inline: 6px; }
+  .motion-switch button span { display: none; }
 }
 
 .daozai-screens { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 26px; }

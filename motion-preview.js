@@ -2,7 +2,7 @@
   const section = document.querySelector('#ai-motion');
   const panel = section.querySelector('#pet-feature');
   const stage = panel.querySelector('.motion-stage');
-  const controls = panel.querySelector('.motion-switch');
+  const controls = section.querySelector('.motion-switch');
   const status = panel.querySelector('.motion-status');
   const selectors = section.querySelectorAll('.feature-selector button');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -19,7 +19,7 @@
     frame = null;
     ready = false;
     animate = false;
-    status.textContent = '动效未能加载，可以重试或打开交互演示。';
+    status.textContent = '动效未能加载。可点「动效」重试，或点击画面进入演示。';
     update();
   }
 
@@ -27,7 +27,7 @@
     frame = document.createElement('iframe');
     frame.title = '宠物培养实时动效';
     frame.tabIndex = -1;
-    frame.src = panel.querySelector('.motion-link').href + '#preview';
+    frame.src = panel.querySelector('.demo-link').href + '#preview';
     frame.addEventListener('error', fail, { once: true });
     watchdog = setTimeout(fail, 45000);
     stage.append(frame);
@@ -55,6 +55,7 @@
   });
 
   function selectFeature(panelId) {
+    controls.inert = panelId !== panel.id;
     selectors.forEach(button => {
       const id = button.getAttribute('aria-controls');
       const active = id === panelId;
