@@ -4,20 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#141715">
-  <meta name="description" content="张雪荣的游戏 UI 设计作品集：热血江湖·觉醒、刀仔、射雕。">
+  <meta name="description" content="张雪荣的游戏 UI 设计作品集，包含热血江湖·觉醒、刀仔、射雕，以及从静态原图制作的 AI 辅助动效示例。">
   <title>张雪荣 · 游戏 UI 设计作品集</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20261116-controls">
+  <link rel="stylesheet" href="styles.css?v=20261118-motion">
   <link rel="preload" as="image" href="assets/swords.webp">
   <script src="data.js" defer></script>
   <script src="app.js?v=20261116-controls" defer></script>
+  <script src="motion-preview.js" defer></script>
 </head>
 <body data-page="home" class="compact-home">
   <a class="skip-link" href="#main">跳到主要内容</a>
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="张雪荣作品集首页"><span class="brand-mark">Z<span>↗</span></span></a>
-    <nav aria-label="项目导航"><a href="jianghu.html">热血江湖</a><a href="daozai.html">刀仔</a><a href="shediao.html">射雕</a></nav>
+    <nav aria-label="项目导航"><a href="jianghu.html">热血江湖</a><a href="daozai.html">刀仔</a><a href="shediao.html">射雕</a><a href="#ai-motion">AI 动效</a></nav>
     
   </header>
   <main id="main">
@@ -60,6 +61,24 @@
         </a>
         <div class="project-info"><div><h2><a href="shediao.html">射雕</a></h2><p>国风武侠界面 · 最终风格定稿</p></div></div>
       </article>
+    </section>
+    <section class="motion-case shell" id="ai-motion" aria-labelledby="motion-title">
+      <div class="motion-intro">
+        <p class="motion-category">AI 辅助动效</p>
+        <h2 id="motion-title">宠物培养</h2>
+        <p class="motion-description">我用 AI 给这张静态界面加上了动效。光环绕着金球转动，金色光丝向下流淌，背景粒子沿着人物的轮廓游走。</p>
+        <a class="motion-link" href="pet-cultivation-v6.html">打开完整演示 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="motion-player">
+        <div class="motion-switch" role="group" aria-label="对比静态原图和动效" hidden>
+          <button type="button" data-mode="still" aria-pressed="true" aria-controls="motion-stage">静态原图</button>
+          <button type="button" data-mode="motion" aria-pressed="false" aria-controls="motion-stage"><span aria-hidden="true">▷</span> 动效预览</button>
+        </div>
+        <div class="motion-stage" id="motion-stage">
+          <img src="assets/pet-cultivation.webp" width="1334" height="750" loading="lazy" decoding="async" alt="宠物培养原图，金球悬浮在蓝色人物线稿前，右侧为属性面板">
+        </div>
+        <p class="motion-status" role="status"></p>
+      </div>
     </section>
   </main>
   <footer class="site-footer shell"><a href="#">回到顶部 ↑</a></footer>
